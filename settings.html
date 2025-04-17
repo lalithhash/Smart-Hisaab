@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Settings - SmartHisaab{% endblock %}
+
+{% block content %}
+<p>
+<div class="card p-4 shadow rounded">
+    <div class="d-flex justify-between align-center mb-4">
+        <h1 class="text-xl font-bold flex items-center gap-2">
+            <i class="fas fa-cog"></i> Settings
+        </h1></p>
+    </div>
+
+    <div class="mb-4"><p>
+        <a href="/add_column" class="btn btn-outline btn-sm d-block mb-2 w-full">
+            <i class="fas fa-columns"></i> Add Column
+        </a>
+    </p>
+        
+        <p>
+        <a href="/update_column" class="btn btn-outline btn-sm d-block mb-2 w-full">
+            <i class="fas fa-edit"></i> Change Column Name 
+        </a></p>
+        
+        <a href="/change_column_type" class="btn btn-outline btn-sm d-block mb-2 w-full">
+            <i class="fas fa-exchange-alt"></i> Change Column Type
+        </a>
+    </div>
+    
+</div>
+{% endblock %}

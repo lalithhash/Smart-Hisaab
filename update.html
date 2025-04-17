@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Update Order - SmartHisaab{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="form-title"><i class="fas fa-edit"></i> Update Order #{{ order[0] }}</h1>
+    
+    <form method="POST">
+        {% for i in range(columns_info|length) %}
+            {% set col_name = columns_info[i][1] %}
+            {% set col_type = columns_info[i][2] %}
+            {% if col_name != 'id' %}
+                <div class="form-group">
+                    <label for="{{ col_name }}">{{ col_name|capitalize }}:</label>
+                    {% if col_name == 'status' %}
+                        <select name="{{ col_name }}" id="{{ col_name }}" class="form-control">
+                            <option value="Pending" {% if order[i] == 'Pending' %}selected{% endif %}>Pending</option>
+                            <option value="Processing" {% if order[i] == 'Processing' %}selected{% endif %}>Processing</option>
+                            <option value="Delivered" {% if order[i] == 'Delivered' %}selected{% endif %}>Delivered</option>
+                            <option value="Cancelled" {% if order[i] == 'Cancelled' %}selected{% endif %}>Cancelled</option>
+                        </select>
+                    {% else %}
+                        <input 
+                            id="{{ col_name }}"
+                            name="{{ col_name }}" 
+                            value="{{ order[i] }}" 
+                            type="{% if 'INT' in col_type.upper() %}number{% elif 'REAL' in col_type.upper() %}number{% else %}text{% endif %}" 
+                            required>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        
+        <div class="d-flex justify-between mt-3">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Save Changes
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Update Column - SmartHisaab{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="form-title"><i class="fas fa-edit"></i> Update Column</h1>
+    
+    {% if message %}
+        <div class="alert {% if '✅' in message %}alert-success{% else %}alert-danger{% endif %} mb-3">
+            {{ message }}
+        </div>
+    {% endif %}
+    
+    <form method="POST" action="/update_column">
+        <div class="form-group">
+            <label for="table_name">Table Name:</label>
+            <input type="text" id="table_name" name="table_name" value="orders" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="old_column_name">Column to Update:</label>
+            <select id="old_column_name" name="old_column_name" required>
+                {% for column in columns_info %}
+                    <option value="{{ column[1] }}">{{ column[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="new_column_name">New Column Name:</label>
+            <input type="text" id="new_column_name" name="new_column_name" placeholder="e.g., product_name" required>
+        </div>
+        
+    
+        
+        <div class="d-flex justify-between mt-3">
+            <a href="/dashboard" class="btn btn-outline">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save"></i> Update Column
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}
